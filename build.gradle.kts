@@ -10,9 +10,11 @@ repositories {
     mavenCentral()
 }
 dependencies {
-    implementation(kotlin("stdlib-jdk8"))
-    testImplementation("org.junit.jupiter:junit-jupiter-api:5.7.0")
-    testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.7.0")
+
+    implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
+    testImplementation(platform("org.junit:junit-bom:5.7.0"))
+    testImplementation("org.junit.jupiter:junit-jupiter")
+    testImplementation("org.assertj:assertj-core:3.11.1")
 
 }
 tasks.withType<KotlinCompile>() {
