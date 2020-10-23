@@ -1,5 +1,9 @@
 package structuralPatterns
 
+import org.assertj.core.api.Assertions
+import org.junit.jupiter.api.Test
+
+
 // 3rd party functionality
 
 data class  DisplayDataType(val index: Float, val data: String)
@@ -15,7 +19,7 @@ class DataDisplay {
 
 data class DatabaseData(val position: Int, val amount: Int)
 
-class DatabaseDatagenerator {
+class DatabaseDataGenerator {
     fun genarateData(): List<DatabaseData> {
         val list = arrayListOf<DatabaseData>()
         list.add(DatabaseData(2, 2))
@@ -40,4 +44,19 @@ class DataDisplayAdapter(val display: DataDisplay): DatabaseDataConverter {
         }
         return returnList
     }
+}
+
+class AdapterTest {
+    @Test
+    fun adapterTest() {
+        val generator = DatabaseDataGenerator()
+        val generatedData = generator.genarateData()
+        val adapter = DataDisplayAdapter(DataDisplay())
+        val convertData = adapter.convertData(generatedData)
+
+        Assertions.assertThat(convertData.size).isEqualTo(3)
+        Assertions.assertThat(convertData[1].index).isEqualTo(3f)
+        Assertions.assertThat(convertData[1].data).isEqualTo("7")
+    }
+
 }
